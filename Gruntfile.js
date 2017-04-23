@@ -16,17 +16,18 @@
         },
 
         copy: {
-            default: {
+            build: {
                 files: [
-                    {expand: true, cwd: '<%= project.vendor %>/angular/', src: 'angular.min.js', dest: '<%= project.build %>/assets/vendor/js'},
+                    {expand: true, cwd: '<%= project.vendor %>/angular/', src: ['angular.min.js', 'angular.min.js.map'], dest: '<%= project.build %>/assets/vendor/js'},
                     {expand: true, cwd: '<%= project.vendor %>/requirejs/', src: 'require.js', dest: '<%= project.build %>/assets/vendor/js'},
                     {expand: true, cwd: '<%= project.vendor %>/jquery/dist', src: 'jquery.min.js', dest: '<%= project.build %>/assets/vendor/js'},
-                    {expand: true, cwd: '<%= project.vendor %>/bootstrap/dist/', src: '*/**.min.js', dest: '<%= project.build %>/assets/vendor/bootstrap'},
-                    {expand: true, cwd: '<%= project.vendor %>/bootstrap/dist/', src: '*/**.min.css', dest: '<%= project.build %>/assets/vendor/bootstrap'},
+                    {expand: true, cwd: '<%= project.vendor %>/bootstrap/dist/', src: ['*/**.min.js', '*/**.min.js.map'], dest: '<%= project.build %>/assets/vendor/bootstrap'},
+                    {expand: true, cwd: '<%= project.vendor %>/bootstrap/dist/', src: ['*/**.min.css', '*/**.min.css.map'], dest: '<%= project.build %>/assets/vendor/bootstrap'},
                     {expand: true, cwd: '<%= project.vendor %>/bootstrap/dist/fonts', src: '*', dest: '<%= project.build %>/assets/vendor/bootstrap/fonts'},
                     {expand: true, cwd: '<%= project.src %>/', src: 'index.html', dest: '<%= project.build %>/'},
-                    {expand: true, cwd: '<%= project.src %>/', src: '**/*.html', dest: '<%= project.build %>/'},
-                    {expand: true, cwd: '<%= project.src %>/scripts/', src: '*/**', dest: '<%= project.build %>/assets/js'},
+                    {expand: true, cwd: '<%= project.src %>/scripts', src: ['**/*.js'], dest: '<%= project.build %>/assets/js'},
+                    {flatten: true, expand: true, cwd: '<%= project.src %>/scripts', src: '**/*.html', dest: '<%= project.build %>/',  filter: 'isFile'},
+                    {expand: true, cwd: '<%= project.src %>/styles', src: ['**/*.css'], dest: '<%= project.build %>/assets/css'},
                 ],
             }
 
@@ -38,6 +39,6 @@
 
 
 	grunt.registerTask('build', function(){
-		grunt.task.run('copy:default');
+		grunt.task.run('copy:build');
 	})
  }
