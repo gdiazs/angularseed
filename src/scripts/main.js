@@ -4,33 +4,33 @@
 		baseUrl : "/assets/js/",
 
 		paths : {
-			'angular' : '../vendor/js/angular.min',
+			'angular': '../vendor/js/angular.min',
 			'angular-route' : '../vendor/js/angular-route.min',
+
+			// Modules
+			'appModule' : 'app.module',
 		},
 
-		shim : {
-			'angular' : {
-				exports: 'angular',
+		shim: {
+			'angular': {
+				exports: 'angular'
 			},
-
 			'angular-route': {
 				deps: ['angular'],
+
 			}
-		},
-	    priority: [
-	        "angular"
-	    ]
-
+		 },
 	});
-
 
 	define(function (require) {
-
 		var angular = require('angular');
 
-		angular.element(document).ready(function () {
-			require('components/app.component');
-		});
-
+	   	angular.element(document).ready(function () {
+	   		require('router');
+	   		var appComponent = require('components/app.component');
+	   		angular.bootstrap(document.documentElement, ["app"]);
+	  	});
 	});
+
+
 })();
