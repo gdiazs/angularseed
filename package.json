@@ -4,20 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npm install && node ./node_modules/bower/bin/bower install"
   },
   "author": "Guillermo B Díaz Solís",
   "license": "ISC",
   "devDependencies": {
-  	"grunt": "^1.0.1",
     "bower": "^1.8.0",
+    "grunt": "^1.0.1",
     "grunt-cli": "^1.2.0",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-jshint": "^1.1.0",
     "karma": "^1.6.0"
   },
-  "dependencies": {
-
-  }
+  "dependencies": {}
 }

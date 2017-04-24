@@ -1,9 +1,11 @@
  module.exports = function(grunt) {
- 	'use strict'
+ 	'use strict';
 
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -15,10 +17,20 @@
             dist: 'dist',
         },
 
+        clean: {
+            dist: '<%= project.dist %>',
+            build: '<%= project.build %>'
+        },
+
+        jshint: {
+            all: ['Gruntfile.js', '<%= project.src %>/scripts/**/*.js']
+        },
+
         copy: {
             build: {
                 files: [
                     {expand: true, cwd: '<%= project.vendor %>/angular/', src: ['angular.min.js', 'angular.min.js.map'], dest: '<%= project.build %>/assets/vendor/js'},
+                    {expand: true, cwd: '<%= project.vendor %>/angular-route/', src: ['angular-route.min.js', 'angular-route.min.js.map'], dest: '<%= project.build %>/assets/vendor/js'},
                     {expand: true, cwd: '<%= project.vendor %>/requirejs/', src: 'require.js', dest: '<%= project.build %>/assets/vendor/js'},
                     {expand: true, cwd: '<%= project.vendor %>/jquery/dist', src: 'jquery.min.js', dest: '<%= project.build %>/assets/vendor/js'},
                     {expand: true, cwd: '<%= project.vendor %>/bootstrap/dist/', src: ['*/**.min.js', '*/**.min.js.map'], dest: '<%= project.build %>/assets/vendor/bootstrap'},
@@ -39,6 +51,8 @@
 
 
 	grunt.registerTask('build', function(){
+        grunt.task.run('clean');
+        grunt.task.run('jshint');
 		grunt.task.run('copy:build');
-	})
- }
+	});
+ };
