@@ -5,6 +5,8 @@
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-connect');
 
 
 	grunt.initConfig({
@@ -47,6 +49,30 @@
 
         },
 
+        connect: {
+                sever: {
+                    options: {
+                        hostname: 'localhost',
+                        port: 9000,
+                        base: 'build/',
+                        livereload: 35729
+                    }
+                }
+        },
+        watch: {
+            options: {
+                livereload: true,
+                dateFormat: function(time) {
+                    grunt.log.writeln('The watch finished in ' + time + 'ms at' + (new Date()).toString());
+                    grunt.log.writeln('Waiting for more changes...');
+                }
+            },
+            src: {
+                files: '<%= project.src %>/**/*',
+                tasks: ['copy:build'],
+            },
+        },
+
         
 
 	});
@@ -56,5 +82,7 @@
         grunt.task.run('clean');
         grunt.task.run('jshint');
 		grunt.task.run('copy:build');
+        grunt.task.run('connect');
+        grunt.task.run('watch');
 	});
  };

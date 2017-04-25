@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "configure": "npm install && node ./node_modules/bower/bin/bower install",
-    "dev": "node ./node_modules/grunt/bin/grunt build && http-server -p 3000 -c1 build/"
+    "dev": "node ./node_modules/grunt/bin/grunt build"
   },
   "author": "Guillermo B Díaz Solís",
   "license": "ISC",
@@ -16,8 +16,10 @@
     "grunt-cli": "^1.2.0",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-connect": "^1.0.2",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-watch": "^1.0.0",
     "karma": "^1.6.0"
   },
   "dependencies": {}
