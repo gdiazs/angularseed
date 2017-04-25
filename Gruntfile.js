@@ -69,7 +69,7 @@
             },
             src: {
                 files: '<%= project.src %>/**/*',
-                tasks: ['copy:build'],
+                tasks: ['jshint','copy:build'],
             },
         },
 
