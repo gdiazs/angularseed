@@ -5,7 +5,7 @@
 		var appModule = require('app.module');
 
 		var sampleComponent = appModule.component('home', {
-			template: '<h2 class="sub-header">Bienvenido</h2>',
+			template: '<h2 class="homeTitle" class="sub-header">Bienvenido</h2>',
 			
 		});
 

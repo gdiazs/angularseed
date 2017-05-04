@@ -29,7 +29,7 @@
         },
 
         copy: {
-            build: {
+            vendor: {
                 files: [
                     {expand: true, cwd: '<%= project.vendor %>/angular/', src: ['angular.min.js', 'angular.min.js.map'], dest: '<%= project.build %>/assets/vendor/js'},
                     {expand: true, cwd: '<%= project.vendor %>/angular-route/', src: ['angular-route.min.js', 'angular-route.min.js.map'], dest: '<%= project.build %>/assets/vendor/js'},
@@ -39,14 +39,31 @@
                     {expand: true, cwd: '<%= project.vendor %>/bootstrap/dist/', src: ['*/**.min.css', '*/**.min.css.map'], dest: '<%= project.build %>/assets/vendor/bootstrap'},
                     {expand: true, cwd: '<%= project.vendor %>/bootstrap/dist/fonts', src: '*', dest: '<%= project.build %>/assets/vendor/bootstrap/fonts'},
                     {expand: true, cwd: '<%= project.vendor %>/components-font-awesome/', src: ['css/*', 'fonts/*'], dest: '<%= project.build %>/assets/vendor/components-font-awesome'},
+                ],
+            },
+            scripts: {
+                files: [
                     {expand: true, cwd: '<%= project.src %>/', src: 'index.html', dest: '<%= project.build %>/'},
                     {expand: true, cwd: '<%= project.src %>/../', src: 'favicon.ico', dest: '<%= project.build %>/'},
                     {expand: true, cwd: '<%= project.src %>/scripts', src: ['**/*.js'], dest: '<%= project.build %>/assets/js'},
                     {flatten: true, expand: true, cwd: '<%= project.src %>/scripts', src: '**/*.html', dest: '<%= project.build %>/',  filter: 'isFile'},
-                    {expand: true, cwd: '<%= project.src %>/styles', src: ['**/*.css'], dest: '<%= project.build %>/assets/css'},
                 ],
             }
 
+        },
+
+        concat: {
+            options: {
+              separator: '\n\n',
+            },
+
+            build_css: {
+                src: [
+                '<%= project.src %>/**/*.css'
+                ],
+
+                dest: '<%= project.build %>/assets/css/styles.css'
+            },
         },
 
         connect: {
@@ -67,10 +84,14 @@
                     grunt.log.writeln('Waiting for more changes...');
                 }
             },
-            src: {
-                files: '<%= project.src %>/**/*',
-                tasks: ['jshint','copy:build'],
+            scripts: {
+                files: '<%= project.src %>/**/*.js',
+                tasks: ['jshint','copy:scripts'],
             },
+            styles: {
+                files: '<%= project.src %>/**/*.css',
+                tasks: ['concat:build_css'],
+            }
         },
 
         
@@ -81,7 +102,9 @@
 	grunt.registerTask('build', function(){
         grunt.task.run('clean');
         grunt.task.run('jshint');
-		grunt.task.run('copy:build');
+        grunt.task.run('copy:vendor');
+		grunt.task.run('copy:scripts');
+        grunt.task.run('concat:build_css');
         grunt.task.run('connect');
         grunt.task.run('watch');
 	});
