@@ -3,10 +3,9 @@
 
 	define( function (require) {
 		var angular =  require('angular');
-		require('angular-route');
+		require('angularRoute');
 		
 		var appModule = angular.module('app', ['ngRoute']);
-
 		return appModule;
 	});
 

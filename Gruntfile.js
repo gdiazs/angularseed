@@ -7,6 +7,8 @@
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
+
 
 
 	grunt.initConfig({
@@ -94,6 +96,21 @@
             }
         },
 
+
+        requirejs: {
+            compile: {
+                options: {
+                    baseUrl: "./build/assets/js",
+                    out: '<%= project.dist %>/<%= pkg.name %>-<%= pkg.version %>.min.js',
+                    mainConfigFile:'./build/assets/js/main.js',
+                    name: 'main'
+
+                },
+                preserveLicenseComments : false,
+                optimize: "uglify"
+            }
+        }
+
         
 
 	});
@@ -108,4 +125,13 @@
         grunt.task.run('connect');
         grunt.task.run('watch');
 	});
+
+    grunt.registerTask('dist', function () {
+        grunt.task.run('clean');
+        grunt.task.run('jshint');
+        grunt.task.run('copy:vendor');
+        grunt.task.run('copy:scripts');
+        grunt.task.run('concat:build_css');
+        grunt.task.run('requirejs');
+    });
  };

@@ -5,7 +5,7 @@
 
 		paths : {
 			'angular': '../vendor/js/angular.min',
-			'angular-route' : '../vendor/js/angular-route.min',
+			'angularRoute' : '../vendor/js/angular-route.min',
 
 			// Modules
 			'appModule' : 'app.module',
@@ -15,22 +15,19 @@
 			'angular': {
 				exports: 'angular'
 			},
-			'angular-route': {
+			'angularRoute': {
+				exports: 'angularRoute',
 				deps: ['angular'],
-
-			}
+			},
 		 },
 	});
 
-	define(function (require) {
-		var angular = require('angular');
-
+	require(['angular','router','components/app.component'], function (angular,router,appComponent) {
 	   	angular.element(document).ready(function () {
-	   		require('router');
-	   		var appComponent = require('components/app.component');
 	   		angular.bootstrap(document.documentElement, ["app"]);
 	  	});
 	});
+
 
 
 })();
