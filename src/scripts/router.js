@@ -6,14 +6,12 @@
 		var appModule = require('app.module');
 		require('components/home/home.component');
 
-		appModule.config(function ($routeProvider) {
-			
-			$routeProvider
-			.when('/', {
-				template: '<home></home>',
-			});
-
-		});
+		appModule.config(['$routeProvider', function ($routeProvider) {
+		  $routeProvider
+		    .when('/', {
+		      template: '<home></home>'
+		    });
+		}]);
 
 	});
 
