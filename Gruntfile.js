@@ -15,7 +15,7 @@
 		pkg: grunt.file.readJSON('package.json'),
 
         project: {
-            src: 'src',
+            src: 'client',
             vendor: 'bower_components',
             build: 'build',
             dist: 'dist',
