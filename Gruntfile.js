@@ -48,8 +48,13 @@
                     {expand: true, cwd: '<%= project.src %>/', src: 'index.html', dest: '<%= project.build %>/'},
                     {expand: true, cwd: '<%= project.src %>/../', src: 'favicon.ico', dest: '<%= project.build %>/'},
                     {expand: true, cwd: '<%= project.src %>/scripts', src: ['**/*.js'], dest: '<%= project.build %>/assets/js'},
-                    {flatten: true, expand: true, cwd: '<%= project.src %>/scripts', src: '**/*.html', dest: '<%= project.build %>/',  filter: 'isFile'},
                 ],
+            },
+
+            templates: {
+                files: [
+                    {flatten: true, expand: true, cwd: '<%= project.src %>/scripts', src: '**/*.html', dest: '<%= project.build %>/',  filter: 'isFile'},
+                ]
             }
 
         },
@@ -93,7 +98,12 @@
             styles: {
                 files: '<%= project.src %>/**/*.css',
                 tasks: ['concat:build_css'],
-            }
+            },
+            templates: {
+                files: '<%= project.src %>/**/*.html',
+                tasks: ['copy:templates'],
+            },
+
         },
 
 
@@ -121,7 +131,9 @@
         grunt.task.run('jshint');
         grunt.task.run('copy:vendor');
 		grunt.task.run('copy:scripts');
+        grunt.task.run('copy:templates');
         grunt.task.run('concat:build_css');
+
         grunt.task.run('connect');
         grunt.task.run('watch');
 	});
@@ -131,6 +143,7 @@
         grunt.task.run('jshint');
         grunt.task.run('copy:vendor');
         grunt.task.run('copy:scripts');
+         grunt.task.run('copy:templates');
         grunt.task.run('concat:build_css');
         grunt.task.run('requirejs');
     });

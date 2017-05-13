@@ -3,7 +3,7 @@
 
 	define(function (require) {
 		var sidebarComponent = require('app.module').component('sidebar', {
-			templateUrl: './sidebar.component.html',
+			templateUrl: 'sidebar.component.html',
 		});
 
 

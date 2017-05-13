@@ -4,7 +4,7 @@
 	define(function (require) {
 		
 		var navbarComponent = require('app.module').component('navbar', {
-			templateUrl: './navbar.component.html',
+			templateUrl: 'navbar.component.html',
 		});
 
 
